@@ -6,10 +6,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  has_many :following_user, through: :follower, source: :followed
-  has_many :follower_user, through: :followed, source: :follower
+  has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy # follower：自分がフォローしている関係の集まり
+  has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy # followed:自分がフォローされている関係の集まり
+  has_many :following_user, through: :follower, source: :followed # following_user:実際に自分がフォローしているユーザー一覧
+  has_many :follower_user, through: :followed, source: :follower # follower_user:実際に自分をフォローしているユーザー一覧
 
   attachment :profile_image
 
